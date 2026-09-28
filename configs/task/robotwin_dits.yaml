@@ -6,11 +6,11 @@ defaults:
   - _self_
 
 run_name: robotwin_wm_dits_rope_noattn_ind_mlp_latnorm_clip4int4_ratio8_f4_32_ep10_2e-4_fp32mw
-output_dir: /mnt/ssd1/brookdu/runs_robotwin/${run_name}
+output_dir: ./runs/${run_name}
 
 model:
   dit_size: s
-  latent_norm_stats_path: /mnt/ssd1/brookdu/robotwin_int4_clip4/robotwin/latent_norm_stats.json
+  latent_norm_stats_path: ./data/int4_clip4/robotwin/latent_norm_stats.json
 
 # Trainable params stay fp32 (AdamW in fp32); forward still runs under bf16 autocast.
 fp32_master_weights: true

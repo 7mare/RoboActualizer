@@ -171,17 +171,31 @@ data/libero_mujoco3.3.2/
 
 ### RoboTwin 2.0
 
+We use the same RoboTwin 2.0 data as flex-pi: [flex-pi/robotwin_3d](https://huggingface.co/datasets/flex-pi/robotwin_3d)
+(LeRobot 2.1, 50 tasks, 27,500 episodes). Training uses a 50-demo-per-task subset (seed 42, 2,500 episodes) and
+RGB only. The script downloads the metadata, `dataset_stats.json` and the subset to `data/robotwin_3d/`:
+
 ```bash
-python scripts/download_robotwin_3d.py --subset-only   # flex-pi/robotwin_3d, 50 demos per task
+python scripts/download_robotwin_3d.py --subset-only
 python scripts/verify_robotwin_3d.py
 ```
 
-Set `ROBOTWIN_3D_DIR` for the download location and edit the paths in `configs/data/robotwin_jpfm.yaml` (and
-`output_dir` / `latent_norm_stats_path` in `configs/task/robotwin_dits.yaml`) to match.
+To store the data elsewhere, set `ROBOTWIN_3D_DIR` for both scripts and point the `./data/robotwin_3d` paths in
+`configs/data/robotwin_jpfm.yaml` to it.
 
 ### Latent and text caches
 
-The actualizer trains on cached text embeddings and V-JEPA latents (`roboact_libero`):
+The actualizer trains on cached text embeddings and V-JEPA latents. The V-JEPA latents (with their
+`latent_norm_stats.json`) are on [Hugging Face](https://huggingface.co/db12312607/Roboactualizer); download them into
+`data/` instead of running `precompute_rgb_latents.py` and `compute_latent_norm_stats.py`:
+
+```bash
+huggingface-cli download db12312607/Roboactualizer --include "data/int2_clip4/libero/*" --local-dir .    # LIBERO, 208 GB
+huggingface-cli download db12312607/Roboactualizer --include "data/int4_clip4/robotwin/*" --local-dir .  # RoboTwin, 518 GB
+```
+
+Latent subfolders are named after the dataset folders (`libero_*_no_noops_lerobot`, `robotwin_3d`), so keep those
+names. The text embeddings are always computed locally. Full local preprocessing (`roboact_libero`):
 
 ```bash
 # LIBERO
@@ -193,8 +207,8 @@ python scripts/compute_latent_norm_stats.py ./data/int2_clip4/libero
 # RoboTwin
 python scripts/precompute_text_embeds.py task=robotwin_dits
 python scripts/precompute_rgb_latents.py task=robotwin_dits model.latent_norm_stats_path=null \
-    +rgb_latent_cache_dir=/mnt/ssd1/brookdu/robotwin_int4_clip4/robotwin
-python scripts/compute_latent_norm_stats.py /mnt/ssd1/brookdu/robotwin_int4_clip4/robotwin
+    +rgb_latent_cache_dir=./data/int4_clip4/robotwin
+python scripts/compute_latent_norm_stats.py ./data/int4_clip4/robotwin
 ```
 
 ## Inference with Released Checkpoints
@@ -203,7 +217,7 @@ The checkpoints are on [Hugging Face](https://huggingface.co/db12312607/Roboactu
 `checkpoints/roboactualizer/`:
 
 ```bash
-huggingface-cli download db12312607/Roboactualizer --local-dir checkpoints/roboactualizer
+huggingface-cli download db12312607/Roboactualizer --exclude "data/*" --local-dir checkpoints/roboactualizer
 cd checkpoints/roboactualizer && sha256sum -c SHA256SUMS && cd ../..
 ```
 

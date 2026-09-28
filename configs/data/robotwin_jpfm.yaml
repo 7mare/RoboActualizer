@@ -3,8 +3,8 @@
 train:
   _target_: Roboactualizer.datasets.lerobot.robot_video_dataset.RobotVideoDataset
   dataset_dirs:
-    - /mnt/ssd1/brookdu/robotwin_3d
-  episode_ids_file: /mnt/ssd1/brookdu/robotwin_3d/subset_perTask50_seed42.json  # also used by the latent precompute
+    - ./data/robotwin_3d
+  episode_ids_file: ./data/robotwin_3d/subset_perTask50_seed42.json  # also used by the latent precompute
   shape_meta:
     images:
       - key: cam_high
@@ -34,7 +34,7 @@ train:
   val_set_proportion: 0.0
   is_training_set: true
   skip_padding_as_possible: false
-  pretrained_norm_stats: /mnt/ssd1/brookdu/robotwin_3d/dataset_stats.json   # full-dataset stats shipped with the data
+  pretrained_norm_stats: ./data/robotwin_3d/dataset_stats.json   # full-dataset stats shipped with the data
   concat_multi_camera: "robotwin"
   processor:
     _target_: Roboactualizer.datasets.lerobot.processors.fastwam_processor.FastWAMProcessor
@@ -58,6 +58,6 @@ train:
       - _target_: Roboactualizer.datasets.lerobot.transforms.image.ToTensor
       - _target_: torchvision.transforms.Resize
         size: [240, 320]
-  text_embedding_cache_dir: /mnt/ssd1/brookdu/robotwin_3d_text_embeds
+  text_embedding_cache_dir: ./data/text_embeds_cache/robotwin
   context_len: 128
-  rgb_latent_cache_dir: /mnt/ssd1/brookdu/robotwin_int4_clip4/robotwin
+  rgb_latent_cache_dir: ./data/int4_clip4/robotwin

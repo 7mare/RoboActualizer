@@ -7,7 +7,7 @@ training pipeline (processor transforms, camera concat/mosaic, resize/crop/norma
     python scripts/precompute_rgb_latents.py task=libero_dits model.latent_norm_stats_path=null \
         +rgb_latent_cache_dir=./data/int2_clip4/libero
     python scripts/precompute_rgb_latents.py task=robotwin_dits model.latent_norm_stats_path=null \
-        +rgb_latent_cache_dir=/mnt/ssd1/brookdu/robotwin_int4_clip4/robotwin
+        +rgb_latent_cache_dir=./data/int4_clip4/robotwin
 
 Writes <cache_dir>/<suite>/episode_XXXXXX.pt and latents_meta.json per suite.
 """

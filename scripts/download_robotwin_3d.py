@@ -21,7 +21,7 @@ from pathlib import Path
 from huggingface_hub import HfApi, hf_hub_download
 
 REPO = "flex-pi/robotwin_3d"
-OUT = Path(os.environ.get("ROBOTWIN_3D_DIR", "/mnt/ssd1/brookdu/robotwin_3d"))
+OUT = Path(os.environ.get("ROBOTWIN_3D_DIR", "./data/robotwin_3d"))
 CAMS = ("cam_high", "cam_left_wrist", "cam_right_wrist")
 CHUNK = 1000  # chunks_size in meta/info.json
 
