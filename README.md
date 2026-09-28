@@ -185,17 +185,7 @@ To store the data elsewhere, set `ROBOTWIN_3D_DIR` for both scripts and point th
 
 ### Latent and text caches
 
-The actualizer trains on cached text embeddings and V-JEPA latents. The V-JEPA latents (with their
-`latent_norm_stats.json`) are on [Hugging Face](https://huggingface.co/db12312607/Roboactualizer); download them into
-`data/` instead of running `precompute_rgb_latents.py` and `compute_latent_norm_stats.py`:
-
-```bash
-huggingface-cli download db12312607/Roboactualizer --include "data/int2_clip4/libero/*" --local-dir .    # LIBERO, 208 GB
-huggingface-cli download db12312607/Roboactualizer --include "data/int4_clip4/robotwin/*" --local-dir .  # RoboTwin, 518 GB
-```
-
-Latent subfolders are named after the dataset folders (`libero_*_no_noops_lerobot`, `robotwin_3d`), so keep those
-names. The text embeddings are always computed locally. Full local preprocessing (`roboact_libero`):
+The actualizer trains on cached text embeddings and V-JEPA latents (`roboact_libero`):
 
 ```bash
 # LIBERO
