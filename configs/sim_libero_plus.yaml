@@ -1,0 +1,9 @@
+# @package _global_
+# LIBERO-Plus: one trial per perturbed task. Needs LIBERO_CONFIG_PATH pointing at the LIBERO-Plus install.
+defaults:
+  - sim_libero
+  - _self_
+
+EVALUATION:
+  num_trials: 1
+  output_dir: ./evaluate_results/libero_plus/${hydra:runtime.choices.task}/${now:%Y%m%d_%H%M%S}

@@ -1,0 +1,11 @@
+# @package _global_
+# DiT-B on LIBERO-Plus with action text-CFG 1.5: 65.0.
+defaults:
+  - sim_libero_plus
+  - override /task: libero_ditb
+  - _self_
+
+ckpt: ./runs/libero_wm_ditb_rope_noattn_ind_mlp_latnorm_clip4int2_ratio4_32_ep15_2e-4/checkpoints/weights/step_130185.pt
+
+EVALUATION:
+  text_cfg_scale: 1.5

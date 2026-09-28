@@ -1,0 +1,12 @@
+# @package _global_
+# DiT-S (fp32 master weights) on RoboTwin 2.0: 58.84; fp32 inference.
+defaults:
+  - sim_robotwin
+  - override /task: robotwin_dits
+  - _self_
+
+ckpt: /mnt/ssd1/brookdu/runs_robotwin/robotwin_wm_dits_rope_noattn_ind_mlp_latnorm_clip4int4_ratio8_f4_32_ep10_2e-4_fp32mw/checkpoints/weights/step_176540.pt
+mixed_precision: "no"
+
+EVALUATION:
+  text_cfg_scale: 1.0

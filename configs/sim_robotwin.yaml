@@ -1,0 +1,41 @@
+# @package _global_
+# Shared RoboTwin 2.0 eval settings; pick a checkpoint via an eval_*.yaml config.
+defaults:
+  - train
+  - _self_
+
+ckpt: null
+gpu_id: 0
+
+model:
+  latent_norm_stats_path: null   # stats are restored from the checkpoint
+
+EVALUATION:
+  robotwin_root: third_party/RoboTwin
+  policy_name: fastwam_policy
+  task_name: null
+  task_config: demo_randomized   # the manager runs demo_clean then demo_randomized
+  instruction_type: unseen
+  eval_num_episodes: 25          # per task and phase
+  output_dir: ./evaluate_results/robotwin/${hydra:runtime.choices.task}/${now:%Y%m%d_%H%M%S}
+  replan_steps: 24               # re-plan after 75% of the 32-step chunk
+  num_inference_steps: 10
+  text_cfg_scale: 1.5            # action text-CFG; 1.0 disables it
+  skip_get_obs_within_replan: false   # z0 clips need an observation every step
+  dataset_stats_path: null       # default: dataset_stats.json next to the checkpoint
+  device: cuda
+
+# Multi-task run (experiments/robotwin/run_robotwin_manager.py).
+MULTIRUN:
+  gpu_ids: null                  # physical GPU ids; null = range(num_gpus)
+  num_gpus: 2
+  max_tasks_per_gpu: 2
+  resume_dir: null               # existing result dir to resume
+  task_file: null                # optional task subset, one name per line
+
+hydra:
+  job:
+    chdir: false
+  run:
+    dir: .
+  output_subdir: null

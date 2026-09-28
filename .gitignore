@@ -1,0 +1,29 @@
+# Track code (.py/.sh), configs (.yaml/.yml) and a few repo files only.
+*
+!*/
+!*.py
+!*.sh
+!*.yaml
+!*.yml
+!/pyproject.toml
+!/README.md
+!/.gitignore
+!LICENSE
+!experiments/libero/libero_plus_sample_2640.txt
+
+# Local data, checkpoints and outputs (after the whitelist so they win).
+/checkpoints
+/data
+/runs
+/outputs/
+/evaluate_results/
+/wandb/
+/build/
+/dist/
+*.egg-info/
+__pycache__/
+.claude/
+.codex/
+third_party/RoboTwin/assets
+third_party/RoboTwin/envs/curobo
+third_party/RoboTwin/policy/fastwam_policy

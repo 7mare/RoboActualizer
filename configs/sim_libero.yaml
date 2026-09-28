@@ -1,0 +1,43 @@
+# @package _global_
+# Shared LIBERO eval settings; pick a checkpoint via an eval_*.yaml config.
+defaults:
+  - train
+  - _self_
+
+ckpt: null
+gpu_id: 0
+
+model:
+  latent_norm_stats_path: null   # stats are restored from the checkpoint
+
+EVALUATION:
+  task_suite_name: libero_spatial
+  task_id: 0
+  num_trials: 50
+  output_dir: ./evaluate_results/libero/${hydra:runtime.choices.task}/${now:%Y%m%d_%H%M%S}
+  num_steps_wait: 30
+  replan_steps: 10
+  binarize_gripper: true
+  num_inference_steps: ${model.num_inference_steps}
+  text_cfg_scale: 1.5            # action text-CFG; 1.0 disables it
+  dataset_stats_path: null       # default: dataset_stats.json next to the checkpoint
+  device: cuda
+
+MULTIRUN:
+  create_only: false
+  task_file: null
+  sample_file: null              # e.g. experiments/libero/libero_plus_sample_2640.txt
+  task_suite_names:
+    - libero_10
+    - libero_goal
+    - libero_spatial
+    - libero_object
+  num_gpus: 2
+  max_tasks_per_gpu: 2
+
+hydra:
+  job:
+    chdir: false
+  run:
+    dir: .
+  output_subdir: null

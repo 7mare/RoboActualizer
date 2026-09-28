@@ -1,0 +1,47 @@
+_target_: Roboactualizer.runtime.create_joint_predict_fm
+
+# Frozen V-JEPA 2.1 ViT-L/16; the two LIBERO cameras are tiled into one 224x448 frame (14x28 patches).
+backbone:
+  model_name: vjepa2_1_vit_large_384
+  ckpt_path: checkpoints/vjepa2/vjepa2_1_vit_large_384.pt
+  cache_dir: checkpoints/vjepa2
+  download_if_missing: false
+  image_size: [224, 448]
+  patch_size: 16
+num_cameras: 2
+
+# z0 clip: clip_len frames spaced frame_interval apart; must match the latent cache.
+clip_len: 4
+frame_interval: 2
+rgb_latent_dtype: float16
+# Per-channel latent stats; training reads the file, evaluation restores them from the ckpt.
+latent_norm_stats_path: null
+# Encode z0 in fp32 at eval (matches the precomputed training latents).
+eval_encode_fp32: false
+
+future_size: 4
+video_freq_ratio: ${data.train.action_video_freq_ratio}
+chunk_size: 16
+raw_action_dim: 7        # eef pose (6) + gripper (1)
+action_dim: 7
+proprio_dim: ${data.train.processor.proprio_output_dim}
+text_dim: 4096
+tokenizer_model_id: Wan-AI/Wan2.1-T2V-1.3B
+tokenizer_max_len: 128
+
+dit_size: s              # s: 384/6 heads, b: 768/12 heads; 12 layers
+num_layers: 12
+dim_head: 64
+dropout: 0.0
+freq_dim: 256
+num_train_timesteps: 1000
+shift: 5.0
+num_inference_steps: 10
+action_weight: 1.0
+image_predict_weight: 1.0
+
+# Inference speedups; outputs are bit-identical with or without them.
+use_kv_cache: true
+use_cuda_graph: true
+use_adaln_cache: true
+use_cross_kv_cache: true

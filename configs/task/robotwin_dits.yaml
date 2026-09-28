@@ -1,0 +1,32 @@
+# @package _global_
+# 300M DiT-S on RoboTwin 2.0 with fp32 master weights (RoboTwin 58.84 checkpoint: step_176540).
+defaults:
+  - override /data: robotwin_jpfm
+  - override /model: joint_predict_fm_robotwin
+  - _self_
+
+run_name: robotwin_wm_dits_rope_noattn_ind_mlp_latnorm_clip4int4_ratio8_f4_32_ep10_2e-4_fp32mw
+output_dir: /mnt/ssd1/brookdu/runs_robotwin/${run_name}
+
+model:
+  dit_size: s
+  latent_norm_stats_path: /mnt/ssd1/brookdu/robotwin_int4_clip4/robotwin/latent_norm_stats.json
+
+# Trainable params stay fp32 (AdamW in fp32); forward still runs under bf16 autocast.
+fp32_master_weights: true
+
+batch_size: 32
+num_workers: 8
+lr_scheduler_type: cosine
+learning_rate: 2e-4
+num_epochs: 10
+max_steps: null
+log_every: 10
+save_every: 17654            # one epoch: ceil(564911 / 32)
+eval_every: 0
+gradient_accumulation_steps: 1
+weight_decay: 1e-2
+resume: null
+
+wandb:
+  name: ${run_name}

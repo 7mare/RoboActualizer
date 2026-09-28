@@ -1,0 +1,63 @@
+# RoboTwin 2.0 (flex-pi robotwin_3d, 240x320): cam_high on top, both wrist cameras below (384x320 mosaic).
+# Training uses the 50-demo-per-task subset (2,500 episodes).
+train:
+  _target_: Roboactualizer.datasets.lerobot.robot_video_dataset.RobotVideoDataset
+  dataset_dirs:
+    - /mnt/ssd1/brookdu/robotwin_3d
+  episode_ids_file: /mnt/ssd1/brookdu/robotwin_3d/subset_perTask50_seed42.json  # also used by the latent precompute
+  shape_meta:
+    images:
+      - key: cam_high
+        raw_shape: [3, 240, 320]
+        shape: [3, 240, 320]
+      - key: cam_left_wrist
+        raw_shape: [3, 240, 320]
+        shape: [3, 240, 320]
+      - key: cam_right_wrist
+        raw_shape: [3, 240, 320]
+        shape: [3, 240, 320]
+    action:
+      - key: default
+        raw_shape: 14          # two arms x (6 joints + gripper)
+        shape: 14
+    state:
+      - key: default
+        raw_shape: 14
+        shape: 14
+  num_frames: 33               # 32 actions; z0 + 4 future frames at stride 8
+  global_sample_stride: 1
+  action_video_freq_ratio: 8
+  clip_len: ${model.clip_len}
+  frame_interval: ${model.frame_interval}
+  video_size: [384, 320]
+  camera_key: null
+  val_set_proportion: 0.0
+  is_training_set: true
+  skip_padding_as_possible: false
+  pretrained_norm_stats: /mnt/ssd1/brookdu/robotwin_3d/dataset_stats.json   # full-dataset stats shipped with the data
+  concat_multi_camera: "robotwin"
+  processor:
+    _target_: Roboactualizer.datasets.lerobot.processors.fastwam_processor.FastWAMProcessor
+    shape_meta: ${data.train.shape_meta}
+    num_obs_steps: ${data.train.num_frames}
+    num_output_cameras: 3
+    action_output_dim: 14
+    proprio_output_dim: 14
+    delta_action_dim_mask: null
+    action_state_transforms: null
+    use_stepwise_action_norm: False
+    norm_default_mode: "z-score"
+    norm_exception_mode: null
+    action_state_merger:
+      _target_: Roboactualizer.datasets.lerobot.transforms.action_state_merger.ConcatLeftAlign
+    train_transforms:
+      - _target_: Roboactualizer.datasets.lerobot.transforms.image.ToTensor
+      - _target_: torchvision.transforms.Resize
+        size: [240, 320]
+    val_transforms:
+      - _target_: Roboactualizer.datasets.lerobot.transforms.image.ToTensor
+      - _target_: torchvision.transforms.Resize
+        size: [240, 320]
+  text_embedding_cache_dir: /mnt/ssd1/brookdu/robotwin_3d_text_embeds
+  context_len: 128
+  rgb_latent_cache_dir: /mnt/ssd1/brookdu/robotwin_int4_clip4/robotwin
