@@ -25,9 +25,9 @@ This repository contains the training and evaluation code on LIBERO, LIBERO-Plus
 
 | Benchmark | Checkpoint | Inference | Success (%) | Eval config |
 |---|---|---|---|---|
-| LIBERO (4 suites x 10 tasks x 50) | DiT-S, step 173580 | 10 steps, no CFG | 98.00 | `eval_libero_dits` |
-| LIBERO-Plus (10,030 tasks x 1) | DiT-S, step 173580 | 10 steps, action text-CFG 1.5 | 63.1 | `eval_libero_plus_dits` |
-| LIBERO-Plus (10,030 tasks x 1) | DiT-B, step 130185 | 10 steps, action text-CFG 1.5 | 65.0 | `eval_libero_plus_ditb` |
+| LIBERO (4 suites x 10 tasks x 50) | DiT-S, step 173580 | 4 steps, no CFG | 98.00 | `eval_libero_dits` |
+| LIBERO-Plus (10,030 tasks x 1) | DiT-S, step 173580 | 4 steps, action text-CFG 1.5 | 63.1 | `eval_libero_plus_dits` |
+| LIBERO-Plus (10,030 tasks x 1) | DiT-B, step 130185 | 4 steps, action text-CFG 1.5 | 65.0 | `eval_libero_plus_ditb` |
 | RoboTwin 2.0 (50 tasks x clean/randomized x 25) | DiT-S fp32, step 176540 | 10 steps, no CFG, fp32 | 58.84 | `eval_robotwin_dits` |
 
 ## Index

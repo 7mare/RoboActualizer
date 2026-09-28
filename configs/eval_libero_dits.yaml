@@ -11,4 +11,5 @@ model:
   eval_encode_fp32: true
 
 EVALUATION:
+  num_inference_steps: 4
   text_cfg_scale: 1.0
