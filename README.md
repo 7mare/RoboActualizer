@@ -4,7 +4,7 @@ Official codebase for **One from Infinity: Actualizing Futures from Pretrained W
 
 <!-- TODO: add the arXiv id and project page once public -->
 [![arXiv](https://img.shields.io/badge/arXiv-coming_soon-b31b1b.svg)](#bibtex)
-[![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-f7c843)](https://huggingface.co/db12312607/Roboactualizer)
+[![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-f7c843)](https://huggingface.co/db12312607/RoboActualizer)
 
 A pretrained video world model already lays out the plausible futures of a scene. RoboActualizer keeps it frozen and
 learns only a tiny **actualizer** that selects the task-conditioned future and reads out the actions that realize it.
@@ -203,11 +203,11 @@ python scripts/compute_latent_norm_stats.py ./data/int4_clip4/robotwin
 
 ## Inference with Released Checkpoints
 
-The checkpoints are on [Hugging Face](https://huggingface.co/db12312607/Roboactualizer). Download them into
+The checkpoints are on [Hugging Face](https://huggingface.co/db12312607/RoboActualizer). Download them into
 `checkpoints/roboactualizer/`:
 
 ```bash
-huggingface-cli download db12312607/Roboactualizer --exclude "data/*" --local-dir checkpoints/roboactualizer
+huggingface-cli download db12312607/RoboActualizer --exclude "data/*" --local-dir checkpoints/roboactualizer
 cd checkpoints/roboactualizer && sha256sum -c SHA256SUMS && cd ../..
 ```
 
