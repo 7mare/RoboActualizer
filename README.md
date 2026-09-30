@@ -318,7 +318,7 @@ teams.
 @article{du2026roboactualizer,
   title={One from Infinity: Actualizing Futures from Pretrained World Models into Robot Actions},
   author={Bang Du and Yichen Xie and Shuqi Zhao and Yuxin Chen and Menglin Wu and Masayoshi Tomizuka},
-  journal={arXiv preprint},
+  journal={arXiv preprint arXiv:2609.36413},
   year={2026}
 }
 ```
