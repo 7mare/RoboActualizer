@@ -3,7 +3,7 @@
 Official codebase for **One from Infinity: Actualizing Futures from Pretrained World Models into Robot Actions**.
 
 <!-- TODO: add the arXiv id and project page once public -->
-[![arXiv](https://img.shields.io/badge/arXiv-coming_soon-b31b1b.svg)](#bibtex)
+[![arXiv](https://img.shields.io/badge/ArXiv-Paper-brown)](https://arxiv.org/pdf/2609.36413)
 [![Hugging Face Model](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Model-f7c843)](https://huggingface.co/db12312607/RoboActualizer)
 
 A pretrained video world model already lays out the plausible futures of a scene. RoboActualizer keeps it frozen and
