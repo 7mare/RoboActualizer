@@ -10,6 +10,9 @@
 !/.gitignore
 !LICENSE
 !experiments/libero/libero_plus_sample_2640.txt
+!/assets/
+!/assets/LIBERO.png
+!/assets/LIBERO-Plus.png
 
 # Local data, checkpoints and outputs (after the whitelist so they win).
 /checkpoints

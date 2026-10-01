@@ -10,6 +10,11 @@ A pretrained video world model already lays out the plausible futures of a scene
 learns only a tiny **actualizer** that selects the task-conditioned future and reads out the actions that realize it.
 This repository contains the training and evaluation code on LIBERO, LIBERO-Plus and RoboTwin 2.0.
 
+<p align="center">
+    <img src="assets/LIBERO.png" width="49%" alt="LIBERO success rate versus trainable parameters" />
+    <img src="assets/LIBERO-Plus.png" width="49%" alt="LIBERO-Plus success rate versus trainable parameters" />
+</p>
+
 ## Highlights
 
 - 🪶 **Tiny trainable model.** A frozen V-JEPA 2.1 ViT-L encoder plus a 60M-parameter actualizer: two DiT experts
