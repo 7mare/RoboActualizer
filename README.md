@@ -22,9 +22,8 @@ This repository contains the training and evaluation code on LIBERO, LIBERO-Plus
   parameters than existing WAMs and VLAs.
 - 💻 **Single-GPU training.** The actualizer trains on cached V-JEPA latents with 32 GB peak memory; LIBERO takes about
   15 hours on one GPU, with no embodied pretraining.
-- ⚡ **39 ms inference.** The encoder runs once per observation; only the actualizer denoises, with KV, AdaLN and
-  cross-attention caches and CUDA graphs (on by default). Over 25 Hz on an RTX A6000.
-- 🌍 **Robust generalization.** 63.1% on LIBERO-Plus with LIBERO training data only (Fast-WAM, 6B: 51.5%).
+- ⚡ **39 ms inference.** The encoder runs once per observation and only the actualizer runs the denoising steps. It runs at over 25 Hz on an RTX A6000.
+- 🌍 **Robust generalization.** 98.0% average success on LIBERO, 63.1% on LIBERO-Plus, 5 real-world tasks on a FANUC CRX-10iA arm and a Unitree G1 humanoid with Dex3-1 hands. It consistently outperforms baselines like Fast-WAM and π0.5 that have the billion-parameter backbones.
 
 ## Results
 
