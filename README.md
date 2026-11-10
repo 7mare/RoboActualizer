@@ -23,14 +23,14 @@ This repository contains the training and evaluation code on LIBERO, LIBERO-Plus
 - 💻 **Single-GPU training.** The actualizer trains on cached V-JEPA latents with 32 GB peak memory; LIBERO takes about
   15 hours on one GPU, with no embodied pretraining.
 - ⚡ **39 ms inference.** The encoder runs once per observation and only the actualizer runs the denoising steps. It runs at over 25 Hz on an RTX A6000.
-- 🌍 **Robust generalization.** 98.0% average success on LIBERO, 63.1% on LIBERO-Plus, 5 real-world tasks on a FANUC CRX-10iA arm and a Unitree G1 humanoid with Dex3-1 hands. It consistently outperforms baselines like Fast-WAM and π0.5 that have the billion-parameter backbones.
+- 🌍 **Robust generalization.** 98.0% average success on LIBERO, 62.2% on LIBERO-Plus, 5 real-world tasks on a FANUC CRX-10iA arm and a Unitree G1 humanoid with Dex3-1 hands. It consistently outperforms baselines like Fast-WAM and π0.5 that have the billion-parameter backbones.
 
 ## Results
 
 | Benchmark | Checkpoint | Inference | Success (%) | Eval config |
 |---|---|---|---|---|
 | LIBERO (4 suites x 10 tasks x 50) | DiT-S, step 173580 | 4 steps, no CFG | 98.00 | `eval_libero_dits` |
-| LIBERO-Plus (10,030 tasks x 1) | DiT-S, step 173580 | 4 steps, action text-CFG 1.5 | 63.1 | `eval_libero_plus_dits` |
+| LIBERO-Plus (10,030 tasks x 1) | DiT-S, step 173580 | 4 steps, action text-CFG 1.5 | 62.2 | `eval_libero_plus_dits` |
 | LIBERO-Plus (10,030 tasks x 1) | DiT-B, step 130185 | 4 steps, action text-CFG 1.5 | 65.0 | `eval_libero_plus_ditb` |
 | RoboTwin 2.0 (50 tasks x clean/randomized x 25) | DiT-S fp32, step 176540 | 10 steps, no CFG, fp32 | 58.84 | `eval_robotwin_dits` |
 

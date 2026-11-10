@@ -1,5 +1,5 @@
 # @package _global_
-# DiT-S on LIBERO-Plus with action text-CFG 1.5: 63.1.
+# DiT-S on LIBERO-Plus with action text-CFG 1.5: 62.2.
 defaults:
   - sim_libero_plus
   - override /task: libero_dits

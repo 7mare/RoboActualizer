@@ -1,5 +1,5 @@
 # @package _global_
-# 300M DiT-S on LIBERO (LIBERO 98.00 / LIBERO-Plus 63.1 with CFG 1.5; checkpoint: step_173580).
+# 300M DiT-S on LIBERO (LIBERO 98.00 / LIBERO-Plus 62.2 with CFG 1.5; checkpoint: step_173580).
 defaults:
   - override /data: libero_2cam
   - override /model: joint_predict_fm_libero
